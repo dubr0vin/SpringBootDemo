@@ -62,13 +62,8 @@ class GroupController(
         if (person.isEmpty) {
             throw PersonNotFoundException()
         }
-        var g = group.get()
-        g.people.add(person.get())
-
-        repository.save(g)
-
         logger.info("Added $person to $group")
-        return g
+        return repository.addPersonToGroup(group.get(), person.get())
     }
 
     @PostMapping("/{id}/remove_person")
@@ -82,13 +77,9 @@ class GroupController(
         if (person.isEmpty) {
             throw PersonNotFoundException()
         }
-        var g = group.get()
-        g.people.remove(person.get())
-
-        repository.save(g)
 
         logger.info("Removed $person from $group")
-        return g
+        return repository.deletePersonFromGroup(group.get(), person.get())
     }
 
 }

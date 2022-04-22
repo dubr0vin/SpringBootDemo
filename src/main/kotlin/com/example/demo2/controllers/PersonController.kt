@@ -55,12 +55,8 @@ class PersonController(
         if (person.isEmpty) {
             throw PersonNotFoundException()
         }
-        var p = person.get()
-        p.phones.add(phone)
-        repository.save(p)
-
         logger.info("Added phone $phone to $person")
-        return p
+        return repository.addPhoneToPerson(person.get(), phone)
     }
 
     @PostMapping("/{id}/remove_phone")
@@ -69,11 +65,7 @@ class PersonController(
         if (person.isEmpty) {
             throw PersonNotFoundException()
         }
-        var p = person.get()
-        p.phones.remove(phone)
-        repository.save(p)
-
         logger.info("Removed phone $phone from $person")
-        return p
+        return repository.removePhoneFromPerson(person.get(), phone)
     }
 }
