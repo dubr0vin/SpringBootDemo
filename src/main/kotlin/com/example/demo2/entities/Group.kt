@@ -1,5 +1,6 @@
-package com.example.demo2
+package com.example.demo2.entities
 
+import com.example.demo2.entities.Person
 import java.util.*
 import javax.persistence.*
 
@@ -10,16 +11,6 @@ class Group(
 
     @OneToMany
     var people: MutableList<Person> = LinkedList(),
-
-    @Id @GeneratedValue var id: Long? = null
-)
-
-@Entity
-class Person(
-    var name:String,
-
-    @ElementCollection
-    var phones: MutableSet<String> = HashSet(),
 
     @Id @GeneratedValue var id: Long? = null
 )
