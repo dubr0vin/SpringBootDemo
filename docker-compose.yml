@@ -1,0 +1,15 @@
+version: '3'
+
+services:
+  psql:
+    image: postgres:latest
+    environment:
+      POSTGRES_PASSWORD: demo
+      POSTGRES_USER: demo
+      POSTGRES_DB: demo
+    expose:
+      - 5432
+  app:
+    build: .
+    ports:
+    - 8080:8080
