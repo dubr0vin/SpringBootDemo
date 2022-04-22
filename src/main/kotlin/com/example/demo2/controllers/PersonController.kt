@@ -1,5 +1,7 @@
 package com.example.demo2.controllers
 
+import com.example.demo2.controllers.exceptions.GroupNotFoundException
+import com.example.demo2.controllers.exceptions.PersonNotFoundException
 import com.example.demo2.repositories.PersonRepository
 import com.example.demo2.entities.Person
 import org.springframework.http.HttpStatus
@@ -20,7 +22,7 @@ class PersonController(
     fun findOne(@PathVariable id: Long): Person {
         var res = repository.findById(id)
         if (res.isEmpty) {
-            throw ResponseStatusException(HttpStatus.NOT_FOUND, "This group does not exist")
+            throw PersonNotFoundException()
         }
         return res.get()
     }
@@ -28,7 +30,7 @@ class PersonController(
     @DeleteMapping("/{id}")
     fun deleteOne(@PathVariable id: Long): String {
         if (!repository.existsById(id)) {
-            throw ResponseStatusException(HttpStatus.NOT_FOUND, "This group does not exist")
+            throw PersonNotFoundException()
         }
         repository.deleteById(id);
         return "Done"
@@ -44,7 +46,7 @@ class PersonController(
     fun addPhone(@PathVariable id: Long, @RequestParam(name = "phone") phone: String): Person {
         val person = repository.findById(id)
         if (person.isEmpty) {
-            throw ResponseStatusException(HttpStatus.NOT_FOUND, "This person does not exist")
+            throw PersonNotFoundException()
         }
         var p = person.get()
         p.phones.add(phone)
@@ -56,7 +58,7 @@ class PersonController(
     fun removePhone(@PathVariable id: Long, @RequestParam(name = "phone") phone: String): Person {
         val person = repository.findById(id)
         if (person.isEmpty) {
-            throw ResponseStatusException(HttpStatus.NOT_FOUND, "This person does not exist")
+            throw PersonNotFoundException()
         }
         var p = person.get()
         p.phones.remove(phone)

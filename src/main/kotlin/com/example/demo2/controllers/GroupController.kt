@@ -1,5 +1,7 @@
 package com.example.demo2.controllers
 
+import com.example.demo2.controllers.exceptions.GroupNotFoundException
+import com.example.demo2.controllers.exceptions.PersonNotFoundException
 import com.example.demo2.repositories.GroupRepository
 import com.example.demo2.repositories.PersonRepository
 import com.example.demo2.entities.Group
@@ -24,7 +26,7 @@ class GroupController(
     fun findOne(@PathVariable id: Long): Group {
         var res = repository.findById(id)
         if (res.isEmpty) {
-            throw ResponseStatusException(HttpStatus.NOT_FOUND, "This group does not exist")
+            throw GroupNotFoundException()
         }
         return res.get()
     }
@@ -32,7 +34,7 @@ class GroupController(
     @DeleteMapping("/{id}")
     fun deleteOne(@PathVariable id: Long): String {
         if (!repository.existsById(id)) {
-            throw ResponseStatusException(HttpStatus.NOT_FOUND, "This group does not exist")
+            throw GroupNotFoundException()
         }
         repository.deleteById(id);
         return "Done"
@@ -48,12 +50,12 @@ class GroupController(
     fun addPerson(@PathVariable id: Long, @RequestParam(name = "id") person_id: Long): Group {
         val group = repository.findById(id)
         if (group.isEmpty) {
-            throw ResponseStatusException(HttpStatus.NOT_FOUND, "This group does not exist")
+            throw GroupNotFoundException()
         }
 
         val person = personRepository.findById(person_id)
         if (person.isEmpty) {
-            throw ResponseStatusException(HttpStatus.NOT_FOUND, "This person does not exist")
+            throw PersonNotFoundException()
         }
         var g = group.get()
         g.people.add(person.get())
@@ -66,12 +68,12 @@ class GroupController(
     fun removePerson(@PathVariable id: Long, @RequestParam(name = "id") person_id: Long): Group {
         val group = repository.findById(id)
         if (group.isEmpty) {
-            throw ResponseStatusException(HttpStatus.NOT_FOUND, "This group does not exist")
+            throw GroupNotFoundException()
         }
 
         val person = personRepository.findById(person_id)
         if (person.isEmpty) {
-            throw ResponseStatusException(HttpStatus.NOT_FOUND, "This person does not exist")
+            throw PersonNotFoundException()
         }
         var g = group.get()
         g.people.remove(person.get())
