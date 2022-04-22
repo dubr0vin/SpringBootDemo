@@ -4,6 +4,7 @@ import com.example.demo2.controllers.exceptions.GroupNotFoundException
 import com.example.demo2.controllers.exceptions.PersonNotFoundException
 import com.example.demo2.repositories.PersonRepository
 import com.example.demo2.entities.Person
+import org.slf4j.LoggerFactory
 import org.springframework.http.HttpStatus
 import org.springframework.web.bind.annotation.*
 import org.springframework.web.server.ResponseStatusException
@@ -13,6 +14,9 @@ import org.springframework.web.server.ResponseStatusException
 class PersonController(
     private val repository: PersonRepository
 ) {
+
+    val logger = LoggerFactory.getLogger(javaClass)
+
     @GetMapping("/")
     fun findAll(): MutableIterable<Person> {
         return repository.findAll()
@@ -33,12 +37,15 @@ class PersonController(
             throw PersonNotFoundException()
         }
         repository.deleteById(id);
+        logger.info("Deleted person with $id")
         return "Done"
     }
 
     @PostMapping("/", consumes = ["application/json"])
     fun createOne(@RequestBody person: Person): Person {
         repository.save(person)
+
+        logger.info("Created $person")
         return person
     }
 
@@ -51,6 +58,8 @@ class PersonController(
         var p = person.get()
         p.phones.add(phone)
         repository.save(p)
+
+        logger.info("Added phone $phone to $person")
         return p
     }
 
@@ -63,6 +72,8 @@ class PersonController(
         var p = person.get()
         p.phones.remove(phone)
         repository.save(p)
+
+        logger.info("Removed phone $phone from $person")
         return p
     }
 }

@@ -13,4 +13,10 @@ class Group(
     var people: MutableList<Person> = LinkedList(),
 
     @Id @GeneratedValue var id: Long? = null
-)
+
+
+) {
+    override fun toString(): String {
+        return "Group(title='$title', id=$id)"
+    }
+}

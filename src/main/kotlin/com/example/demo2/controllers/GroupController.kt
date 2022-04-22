@@ -5,9 +5,11 @@ import com.example.demo2.controllers.exceptions.PersonNotFoundException
 import com.example.demo2.repositories.GroupRepository
 import com.example.demo2.repositories.PersonRepository
 import com.example.demo2.entities.Group
+import org.slf4j.LoggerFactory
 import org.springframework.http.HttpStatus
 import org.springframework.web.bind.annotation.*
 import org.springframework.web.server.ResponseStatusException
+import java.util.logging.Logger
 
 @RestController
 @RequestMapping("/api/group")
@@ -15,6 +17,7 @@ class GroupController(
     private val repository: GroupRepository,
     private val personRepository: PersonRepository
 ) {
+    val logger = LoggerFactory.getLogger(javaClass)
 
 
     @GetMapping("/")
@@ -37,12 +40,14 @@ class GroupController(
             throw GroupNotFoundException()
         }
         repository.deleteById(id);
+        logger.info("Deleted group with $id")
         return "Done"
     }
 
     @PostMapping("/", consumes = ["application/json"])
     fun createOne(@RequestBody group: Group): Group {
         repository.save(group)
+        logger.info("Created $group")
         return group
     }
 
@@ -61,6 +66,8 @@ class GroupController(
         g.people.add(person.get())
 
         repository.save(g)
+
+        logger.info("Added $person to $group")
         return g
     }
 
@@ -79,6 +86,8 @@ class GroupController(
         g.people.remove(person.get())
 
         repository.save(g)
+
+        logger.info("Removed $person from $group")
         return g
     }
 

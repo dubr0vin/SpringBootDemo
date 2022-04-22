@@ -14,4 +14,8 @@ class Person(
     var phones: MutableSet<String> = HashSet(),
 
     @Id @GeneratedValue var id: Long? = null
-)
+) {
+    override fun toString(): String {
+        return "Person(name='$name', id=$id)"
+    }
+}
