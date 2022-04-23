@@ -1,12 +1,12 @@
 type Person {
     id: ID!,
     name: String!,
-    phones: [String]!
+    phones: [String!]!
 }
 type Group {
     id: ID!,
     title: String!,
-    people: [Person]!
+    people: [Person!]!
 }
 type Query {
     groups: [Group]
@@ -15,13 +15,13 @@ type Query {
     person(id: ID): Person
 }
 type Mutation {
-    createGroup(title: String): Group,
-    addPersonToGroup(group_id: ID, person_id: ID): Group,
-    removePersonFromGroup(group_id: ID, person_id: ID): Group,
-    deleteGroup(group_id: ID): ID,
+    createGroup(title: String!): Group,
+    addPersonToGroup(group_id: ID!, person_id: ID!): Group,
+    removePersonFromGroup(group_id: ID!, person_id: ID!): Group,
+    deleteGroup(group_id: ID!): ID,
 
-    createPerson(name: String): Person,
-    addPhoneToPerson(person_id: ID, phone: String): Person,
-    removePhoneFromPerson(person_id: ID, phone: String): Person,
-    deletePerson(person_id: ID): ID,
+    createPerson(name: String!): Person,
+    addPhoneToPerson(person_id: ID!, phone: String!): Person,
+    removePhoneFromPerson(person_id: ID!, phone: String!): Person,
+    deletePerson(person_id: ID!): ID,
 }
