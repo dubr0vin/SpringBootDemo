@@ -26,7 +26,7 @@ class PersonController(
     fun findOne(@PathVariable id: Long): Person {
         var res = repository.findById(id)
         if (res.isEmpty) {
-            throw PersonNotFoundException()
+            throw PersonNotFoundException(id)
         }
         return res.get()
     }
@@ -34,7 +34,7 @@ class PersonController(
     @DeleteMapping("/{id}")
     fun deleteOne(@PathVariable id: Long): String {
         if (!repository.existsById(id)) {
-            throw PersonNotFoundException()
+            throw PersonNotFoundException(id)
         }
         repository.deleteById(id);
         logger.info("Deleted person with $id")
@@ -53,7 +53,7 @@ class PersonController(
     fun addPhone(@PathVariable id: Long, @RequestParam(name = "phone") phone: String): Person {
         val person = repository.findById(id)
         if (person.isEmpty) {
-            throw PersonNotFoundException()
+            throw PersonNotFoundException(id)
         }
         logger.info("Added phone $phone to $person")
         return repository.addPhoneToPerson(person.get(), phone)
@@ -63,7 +63,7 @@ class PersonController(
     fun removePhone(@PathVariable id: Long, @RequestParam(name = "phone") phone: String): Person {
         val person = repository.findById(id)
         if (person.isEmpty) {
-            throw PersonNotFoundException()
+            throw PersonNotFoundException(id)
         }
         logger.info("Removed phone $phone from $person")
         return repository.removePhoneFromPerson(person.get(), phone)

@@ -30,12 +30,12 @@ class GraphQLMutationController(
     fun addPersonToGroup(@Argument group_id: Long, @Argument person_id: Long): Group {
         val group = groupRepository.findById(group_id)
         if (group.isEmpty) {
-            throw GroupNotFoundException()
+            throw GroupNotFoundException(group_id)
         }
 
         val person = personRepository.findById(person_id)
         if (person.isEmpty) {
-            throw PersonNotFoundException()
+            throw PersonNotFoundException(person_id)
         }
         logger.info("Added $person to $group")
         return groupRepository.addPersonToGroup(group.get(), person.get())
@@ -45,12 +45,12 @@ class GraphQLMutationController(
     fun removePersonFromGroup(@Argument group_id: Long, @Argument person_id: Long): Group {
         val group = groupRepository.findById(group_id)
         if (group.isEmpty) {
-            throw GroupNotFoundException()
+            throw GroupNotFoundException(group_id)
         }
 
         val person = personRepository.findById(person_id)
         if (person.isEmpty) {
-            throw PersonNotFoundException()
+            throw PersonNotFoundException(person_id)
         }
         logger.info("Removed $person from $group")
         return groupRepository.deletePersonFromGroup(group.get(), person.get())
@@ -59,7 +59,7 @@ class GraphQLMutationController(
     @MutationMapping
     fun deleteGroup(@Argument group_id: Long): Long {
         if (!groupRepository.existsById(group_id)) {
-            throw GroupNotFoundException()
+            throw GroupNotFoundException(group_id)
         }
         groupRepository.deleteById(group_id);
         logger.info("Deleted group with $group_id")
@@ -78,7 +78,7 @@ class GraphQLMutationController(
     fun addPhoneToPerson(person_id: Long, phone: String): Person {
         val person = personRepository.findById(person_id)
         if (person.isEmpty) {
-            throw PersonNotFoundException()
+            throw PersonNotFoundException(person_id)
         }
         logger.info("Added phone $phone to $person")
         return personRepository.addPhoneToPerson(person.get(), phone)
@@ -88,7 +88,7 @@ class GraphQLMutationController(
     fun removePhoneFromPerson(person_id: Long, phone: String): Person {
         val person = personRepository.findById(person_id)
         if (person.isEmpty) {
-            throw PersonNotFoundException()
+            throw PersonNotFoundException(person_id)
         }
         logger.info("Removed phone $phone from $person")
         return personRepository.removePhoneFromPerson(person.get(), phone)
@@ -97,7 +97,7 @@ class GraphQLMutationController(
     @MutationMapping
     fun deletePerson(person_id: Long): Long {
         if (!personRepository.existsById(person_id)) {
-            throw GroupNotFoundException()
+            throw PersonNotFoundException(person_id)
         }
         personRepository.deleteById(person_id);
         logger.info("Deleted person with $person_id")

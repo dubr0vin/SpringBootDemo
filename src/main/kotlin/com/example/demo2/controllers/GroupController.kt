@@ -29,7 +29,7 @@ class GroupController(
     fun findOne(@PathVariable id: Long): Group {
         var res = repository.findById(id)
         if (res.isEmpty) {
-            throw GroupNotFoundException()
+            throw GroupNotFoundException(id)
         }
         return res.get()
     }
@@ -37,7 +37,7 @@ class GroupController(
     @DeleteMapping("/{id}")
     fun deleteOne(@PathVariable id: Long): String {
         if (!repository.existsById(id)) {
-            throw GroupNotFoundException()
+            throw GroupNotFoundException(id)
         }
         repository.deleteById(id);
         logger.info("Deleted group with $id")
@@ -55,12 +55,12 @@ class GroupController(
     fun addPerson(@PathVariable id: Long, @RequestParam(name = "id") person_id: Long): Group {
         val group = repository.findById(id)
         if (group.isEmpty) {
-            throw GroupNotFoundException()
+            throw GroupNotFoundException(id)
         }
 
         val person = personRepository.findById(person_id)
         if (person.isEmpty) {
-            throw PersonNotFoundException()
+            throw PersonNotFoundException(person_id)
         }
         logger.info("Added $person to $group")
         return repository.addPersonToGroup(group.get(), person.get())
@@ -70,12 +70,12 @@ class GroupController(
     fun removePerson(@PathVariable id: Long, @RequestParam(name = "id") person_id: Long): Group {
         val group = repository.findById(id)
         if (group.isEmpty) {
-            throw GroupNotFoundException()
+            throw GroupNotFoundException(id)
         }
 
         val person = personRepository.findById(person_id)
         if (person.isEmpty) {
-            throw PersonNotFoundException()
+            throw PersonNotFoundException(person_id)
         }
 
         logger.info("Removed $person from $group")
