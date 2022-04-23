@@ -15,6 +15,9 @@ spring:
     url: "jdbc:postgresql://localhost:5432/demo"
     username: demo
     password: demo
+  graphql:
+    graphiql:
+      enabled: true
 ---
 spring:
   config:
