@@ -1,4 +1,4 @@
-package com.example.demo2.controllers.exceptions
+package dev.dubrovin.springbootdemo.controllers.exceptions
 
 import org.springframework.http.HttpStatus
 import org.springframework.web.server.ResponseStatusException

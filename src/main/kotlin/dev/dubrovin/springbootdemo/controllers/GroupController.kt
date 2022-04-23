@@ -1,10 +1,10 @@
-package com.example.demo2.controllers
+package dev.dubrovin.springbootdemo.controllers
 
-import com.example.demo2.controllers.exceptions.GroupNotFoundException
-import com.example.demo2.controllers.exceptions.PersonNotFoundException
-import com.example.demo2.repositories.GroupRepository
-import com.example.demo2.repositories.PersonRepository
-import com.example.demo2.entities.Group
+import dev.dubrovin.springbootdemo.controllers.exceptions.GroupNotFoundException
+import dev.dubrovin.springbootdemo.controllers.exceptions.PersonNotFoundException
+import dev.dubrovin.springbootdemo.repositories.GroupRepository
+import dev.dubrovin.springbootdemo.repositories.PersonRepository
+import dev.dubrovin.springbootdemo.entities.Group
 import org.slf4j.LoggerFactory
 import org.springframework.http.HttpStatus
 import org.springframework.web.bind.annotation.*

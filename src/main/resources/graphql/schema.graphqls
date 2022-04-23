@@ -1,12 +1,12 @@
 type Person {
     id: ID!,
-    name: String,
-    phones: [String]
+    name: String!,
+    phones: [String]!
 }
 type Group {
     id: ID!,
-    title: String,
-    people: [Person]
+    title: String!,
+    people: [Person]!
 }
 type Query {
     groups: [Group]

@@ -1,9 +1,9 @@
-package com.example.demo2
+package dev.dubrovin.springbootdemo
 
-import com.example.demo2.entities.Group
-import com.example.demo2.entities.Person
-import com.example.demo2.repositories.GroupRepository
-import com.example.demo2.repositories.PersonRepository
+import dev.dubrovin.springbootdemo.entities.Group
+import dev.dubrovin.springbootdemo.entities.Person
+import dev.dubrovin.springbootdemo.repositories.GroupRepository
+import dev.dubrovin.springbootdemo.repositories.PersonRepository
 import org.junit.jupiter.api.Test
 import org.springframework.beans.factory.annotation.Autowired
 import org.springframework.boot.test.autoconfigure.orm.jpa.DataJpaTest

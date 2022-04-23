@@ -1,6 +1,6 @@
-package com.example.demo2.entities
+package dev.dubrovin.springbootdemo.entities
 
-import com.example.demo2.entities.Person
+import dev.dubrovin.springbootdemo.entities.Person
 import java.util.*
 import javax.persistence.*
 

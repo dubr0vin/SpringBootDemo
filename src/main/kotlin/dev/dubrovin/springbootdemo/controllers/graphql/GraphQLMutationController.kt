@@ -1,11 +1,11 @@
-package com.example.demo2.controllers.graphql
+package dev.dubrovin.springbootdemo.controllers.graphql
 
-import com.example.demo2.controllers.exceptions.GroupNotFoundException
-import com.example.demo2.controllers.exceptions.PersonNotFoundException
-import com.example.demo2.entities.Group
-import com.example.demo2.entities.Person
-import com.example.demo2.repositories.GroupRepository
-import com.example.demo2.repositories.PersonRepository
+import dev.dubrovin.springbootdemo.controllers.exceptions.GroupNotFoundException
+import dev.dubrovin.springbootdemo.controllers.exceptions.PersonNotFoundException
+import dev.dubrovin.springbootdemo.entities.Group
+import dev.dubrovin.springbootdemo.entities.Person
+import dev.dubrovin.springbootdemo.repositories.GroupRepository
+import dev.dubrovin.springbootdemo.repositories.PersonRepository
 import org.slf4j.LoggerFactory
 import org.springframework.graphql.data.method.annotation.Argument
 import org.springframework.graphql.data.method.annotation.MutationMapping

@@ -1,9 +1,9 @@
-package com.example.demo2.controllers.graphql
+package dev.dubrovin.springbootdemo.controllers.graphql
 
-import com.example.demo2.entities.Group
-import com.example.demo2.entities.Person
-import com.example.demo2.repositories.GroupRepository
-import com.example.demo2.repositories.PersonRepository
+import dev.dubrovin.springbootdemo.entities.Group
+import dev.dubrovin.springbootdemo.entities.Person
+import dev.dubrovin.springbootdemo.repositories.GroupRepository
+import dev.dubrovin.springbootdemo.repositories.PersonRepository
 import org.springframework.graphql.data.method.annotation.Argument
 import org.springframework.graphql.data.method.annotation.QueryMapping
 import org.springframework.stereotype.Controller

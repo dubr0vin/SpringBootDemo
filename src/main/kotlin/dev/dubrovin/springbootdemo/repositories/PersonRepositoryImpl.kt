@@ -1,6 +1,6 @@
-package com.example.demo2.repositories
+package dev.dubrovin.springbootdemo.repositories
 
-import com.example.demo2.entities.Person
+import dev.dubrovin.springbootdemo.entities.Person
 import org.springframework.beans.factory.annotation.Autowired
 import org.springframework.context.annotation.Lazy
 import org.springframework.stereotype.Component

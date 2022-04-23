@@ -1,4 +1,4 @@
-package com.example.demo2
+package dev.dubrovin.springbootdemo
 
 import org.springframework.boot.autoconfigure.SpringBootApplication
 import org.springframework.boot.autoconfigure.jdbc.DataSourceAutoConfiguration

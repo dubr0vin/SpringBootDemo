@@ -1,4 +1,4 @@
-package com.example.demo2.entities
+package dev.dubrovin.springbootdemo.entities
 
 import java.util.*
 import javax.persistence.ElementCollection
