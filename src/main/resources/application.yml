@@ -1,0 +1,38 @@
+server:
+  port: 8080
+
+spring:
+  jpa:
+    database: postgresql
+    show-sql: true
+    generate-ddl: true
+    hibernate:
+      ddl-auto: update
+  sql:
+    init:
+      platform: postgres
+  datasource:
+    url: "jdbc:postgresql://localhost:5432/demo"
+    username: demo
+    password: demo
+---
+spring:
+  config:
+    activate:
+      on-profile: docker-compose
+  datasource:
+    url: "jdbc:postgresql://psql:5432/demo"
+    username: demo
+    password: demo
+---
+spring:
+  config:
+    activate:
+      on-profile: test
+  datasource:
+    url: jdbc:h2:mem:mydb
+    username: demo
+    password: demo
+    driverClassName: org.h2.Driver
+    jpa:
+      spring.jpa.database-platform: org.hibernate.dialect.H2Dialect
